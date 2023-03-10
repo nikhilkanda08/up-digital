@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+    <!--begin::Card-->
+    <div class="card">
+        <!--begin::Card header-->
+        <div class="card-header">
+            <!--begin::Card title-->
+            <div class="card-title fs-3 fw-bold">Statement</div>
+            <!--end::Card title-->
+        </div>
+        <!--end::Card header-->
+        <!--begin::Card body-->
+        <div class="card-body p-0">
+            <!--begin::Table wrapper-->
+            <div class="table-responsive">
+                <!--begin::Table-->
+                <table class="table table-flush align-middle table-row-bordered table-row-solid gy-4 gs-9">
+                    <!--begin::Thead-->
+                    <thead class="border-gray-200 fs-5 fw-semibold bg-lighten">
+                        <tr>
+                            <th class="min-w-250px">Date</th>
+                            <th class="min-w-250px">Start Date</th>
+                            <th class="min-w-250px">End Date</th>
+                            <th class="min-w-100px">Charge</th>
+                            <th class="min-w-100px">Status</th>
+                            <!-- <th class="min-w-150px">Stripe Link</th> -->
+                            <th class="min-w-150px">PDF Invoice</th>
+                        </tr>
+                    </thead>
+                    <!--end::Thead-->
+                    <!--begin::Tbody-->
+                    <tbody class="fw-6 fw-semibold text-gray-600">
+                        
+                        {% for record in data %}
+                            <tr>
+                                <td>
+                                    <a href="#" class="text-hover-primary text-gray-600">{{record.created_at}}</a>
+                                </td>
+                                <td>
+                                    <a href="#" class="text-hover-primary text-gray-600">{{record.start}}</a>
+                                </td>
+                                <td>
+                                    <a href="#" class="text-hover-primary text-gray-600">{{record.end}}</a>
+                                </td>
+                                <td>
+                                    <span class="badge badge-light-success fs-7 fw-bold">{{record.total}} {{record.currency}}</span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-light-success fs-7 fw-bold">{{record.status}}</span>
+                                </td>
+                                <!-- <td>
+                                    <a href="{{record.hosted_invoice_url}}" class="text-hover-primary text-gray-600">Stripe</a>
+                                </td> -->
+                                <td>
+                                    <button class="btn btn-sm btn-primary text-white">
+                                        <a href="{{record.invoice_pdf}}" class="text-hover-primary text-gray-600" style="color: white!important;">
+                                            Download
+                                        </a>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                    <!--end::Tbody-->
+                </table>
+                <!--end::Table-->
+            </div>
+            <!--end::Table wrapper-->
+        </div>
+        <!--end::Card body-->
+    </div>
+    <!--end::Card-->
+    <!-- <script>
+        $(document).ready(function(){
+            $('#kt_aside_toggle').click();
+        });
+    </script> -->
+{% endblock content %}

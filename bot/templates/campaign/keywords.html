@@ -1,0 +1,72 @@
+{% extends "./campaignBase.html" %}
+{% block CampaignContent %}
+<h1>Keyword</h1>
+<!-- keyword -->
+<!--begin::Card-->
+<div class="card">
+    <!--begin::Card header-->
+    <div class="card-header">
+        <!--begin::Card title-->
+        <div class="card-title fs-3 fw-bold">Keywords</div>
+        <!--end::Card title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body p-0">
+        <!--begin::Table wrapper-->
+        <div class="table-responsive">
+            <!--begin::Table-->
+            <table class="table table-flush align-middle table-row-bordered table-row-solid gy-4 gs-9">
+                <!--begin::Thead-->
+                <thead class="border-gray-200 fs-5 fw-semibold bg-lighten">
+                    <tr>
+                        <th class="min-w-250px">Date</th>
+                        <th class="min-w-100px">City</th>
+                        <th class="min-w-150px">Keyword</th>
+                        <th class="min-w-150px">Seaches/Day</th>
+                        <th class="min-w-150px">Position</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <!--end::Thead-->
+                <!--begin::Tbody-->
+                <tbody class="fw-6 fw-semibold text-gray-600">
+                    
+                    {% for keyword in keywords_data %}
+                        <tr id="keyword_row_{{keyword.id}}">
+                            <td>{{keyword.created_at}}</td>
+                            <td>{{keyword.city}}({{keyword.state}},{{keyword.country}})</td>
+                            <td>
+                                <a href="/search-results/{{keyword.id}}/" class="text-hover-primary text-gray-600">{{keyword.keyword}}</a>
+                            </td>
+                            <td>
+                                <span class="badge badge-light-success fs-7 fw-bold">{{keyword.searches_per_day}}</span>
+                            </td>
+                            <td>
+                                {% if keyword.id|keyword_status %}
+                                    <span class="badge badge-light-success fs-7 fw-bold">Found</span>
+                                {% else %}
+                                    <span class="badge badge-light-danger fs-7 fw-bold">Not Found</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="/search-results/{{keyword.id}}/" class="btn btn-sm btn-light btn-active-light-primary">View</a>
+                                <a onclick="delete_keyword('{{keyword.id}}')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                            
+                        </tr>
+                    {% endfor %}
+                    
+                </tbody>
+                <!--end::Tbody-->
+            </table>
+            <!--end::Table-->
+        </div>
+        <!--end::Table wrapper-->
+    </div>
+    <!--end::Card body-->
+</div>
+<!--end::Card-->
+{% endblock CampaignContent %}

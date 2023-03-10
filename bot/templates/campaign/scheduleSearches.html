@@ -1,0 +1,86 @@
+{% extends "./campaignBase.html" %}
+{% block CampaignContent %}
+<h1>Schedule Searches</h1>
+<!--begin::Card-->
+<div class="card">
+    <!--begin::Card header-->
+    <div class="card-header">
+        <!--begin::Card title-->
+        <div class="card-title fs-3 fw-bold">Campaign Searches</div>
+        <!--end::Card title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body p-0">
+        <!--begin::Table wrapper-->
+        <div class="table-responsive">
+            <!--begin::Table-->
+            <table class="table table-flush align-middle table-row-bordered table-row-solid gy-4 gs-9">
+                <!--begin::Thead-->
+                <thead class="border-gray-200 fs-5 fw-semibold bg-lighten">
+                    <tr>
+                        <th class="min-w-250px">Date</th>
+                        <th class="min-w-250px">Keyword</th>
+                        <th class="min-w-100px">Parameter</th>
+                        <th class="min-w-150px">Position</th>
+                        <th class="min-w-150px">Scheduled For</th>
+                        <th class="min-w-150px"></th>
+                    </tr>
+                </thead>
+                <!--end::Thead-->
+                <!--begin::Tbody-->
+                <tbody class="fw-6 fw-semibold text-gray-600">
+                        
+                    {% for result in SearchResultData %}
+                        <tr>
+                            <td>
+                            {% if result.status %}
+                                <a href="/result-detail/{{result.id}}" class="text-hover-primary text-gray-600">{{result.created_at}}</a>
+                            {% else %}
+                                <a href="#" class="text-hover-primary text-gray-600">{{result.created_at}}</a>
+                            {% endif %}
+                            </td>
+                            <td>
+                                {{result.Keywords.keyword}}
+                            </td>
+                            <td>
+                                {{result.campaign.search_type}}
+                                <span class="badge badge-light-success fs-7 fw-bold">{{result.Keywords.country}}</span>
+                            </td>
+                            <td>
+                                {% if result.found_index %}
+                                    {% if result.rank == 0 or result.rank == None %}
+                                        <span class="badge badge-light-success fs-7 fw-bold">Found</span>
+                                    {% else %}
+                                        <span class="badge badge-light-success fs-7 fw-bold">{{result.rank}}</span>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="badge badge-light-danger fs-7 fw-bold">Not Found</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{result.Schedule}}
+                            </td>
+                            <td>
+                                
+                                {% if result.status %}
+                                    <a href="/result-detail/{{result.id}}" class="btn btn-sm btn-light btn-active-light-primary"><span class="badge badge-light-success fs-7 fw-bold">&#10004;</span>View</a>
+                                {% else %}
+                                    <a onclick="runBot('{{result.id}}')" class="btn btn-sm btn-light btn-active-light-primary"><i class='far fa-clock'></i>Run Bot</a>
+                                    <!-- <span class="badge badge-light-danger fs-7 fw-bold"></span> -->
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    
+                </tbody>
+                <!--end::Tbody-->
+            </table>
+            <!--end::Table-->
+        </div>
+        <!--end::Table wrapper-->
+    </div>
+    <!--end::Card body-->
+</div>
+<!--end::Card-->
+{% endblock CampaignContent %}

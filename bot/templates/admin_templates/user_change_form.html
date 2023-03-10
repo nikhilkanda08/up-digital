@@ -1,0 +1,167 @@
+{% extends 'admin/change_form.html' %}
+{% load load_admin_variables %}
+{% block after_field_sets %}
+
+<style>
+    /* modal css */
+    /* body {font-family: Arial, Helvetica, sans-serif;} */
+
+    /* The Modal (background) */
+    .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%!important;
+    }
+
+    /* The Close Button */
+    .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    }
+</style>
+<!-- sweet alerts -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<h2>Setting</h2>
+
+<!-- hidden inputs -->
+<input type="hidden" id="userID" value="{{original.id}}">
+<div><div class="update-btn" style="float: right;width: 123px;" onclick="changePasswordModal()">Update Password</div></div>
+<div>Total Pending Searches: <span>{{original.id|remainingSearches:original.searches}}</span></div>
+
+<table style="width: 100%;">
+<tr>
+    <th>Title</th>
+    <th>Website</th>
+    <th>Search Type</th>
+    <th>Active</th>
+</tr>
+{% for camp in original.userCampaign %}
+<tr>
+    <td>{{camp.title}}</td>
+    <td>{{camp.website}}</td>
+    <td>{{camp.get_search_type_display}}</td>
+    {% if camp.is_active %}
+        <td><span style="color: #00ff00;">&#10003</span></td>
+    {% else %}
+        <td><span style="color: #ff0000;">&#10006</span></td>
+    {% endif %}
+</tr>
+{% endfor %}
+</table>
+<br><br>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <!-- <div class="card text-center">
+            <div class="card-header h5 text-white bg-primary"><h2>Password Reset</h2></div>
+            <div class="card-body px-5">
+                
+                <div class="form-group">
+                    <input type="password" placeholder="Password1"/>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password2"/>
+                </div>
+                <a href="#" class="btn btn-primary w-100">Reset password</a>
+                
+            </div>
+        </div> -->
+        <div class="mainDiv">
+            <div class="cardStyle">
+              <div>
+                <img src="https://s3-us-west-2.amazonaws.com/shipsy-public-assets/shipsy/SHIPSY_LOGO_BIRD_BLUE.png" id="signupLogo" style="max-height: 100px;
+                margin: auto;
+                display: flex;
+                flex-direction: column;"/>
+                
+                <h2 class="formTitle" style="font-weight: 600;
+                margin-top: 20px;
+                text-align: center;">
+                  Rest Password
+                </h2>
+                
+              <div class="inputDiv" style="width: 70%;
+              display: flex;
+              flex-direction: column;
+              margin: auto;">
+                <label class="inputLabel" for="password" style="font-size: 12px;
+                color: #555;
+                margin-bottom: 6px;
+                margin-top: 24px;">New Password</label>
+                <input type="password" id="password" name="password" required style="height: 40px;
+                font-size: 16px;
+                border-radius: 4px;
+                border: none;
+                border: solid 1px #ccc;
+                padding: 0 11px;">
+              </div>
+                
+              <div class="inputDiv" style="width: 70%;
+              display: flex;
+              flex-direction: column;
+              margin: auto;">
+                <label class="inputLabel" for="confirmPassword" style="font-size: 12px;
+                color: #555;
+                margin-bottom: 6px;
+                margin-top: 24px;">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" style="height: 40px;
+                font-size: 16px;
+                border-radius: 4px;
+                border: none;
+                border: solid 1px #ccc;
+                padding: 0 11px;">
+              </div>
+              
+              <div class="buttonWrapper" style="margin-top: 40px;">
+                <button type="button" id="resetPasswordButton" class="submitButton pure-button pure-button-primary" style="width: 30%;
+                height: 40px;
+                margin: auto;
+                display: block;
+                color: #fff;
+                background-color: #065492;
+                border-color: #065492;
+                border-radius: 4px;
+                font-size: 14px;
+                cursor: pointer;">
+                  <span>Submit</span>
+                  <span id="loader"></span>
+                </button>
+              </div>
+                <br><br>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

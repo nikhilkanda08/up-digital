@@ -1,0 +1,454 @@
+{% extends "base.html" %}
+{% block content %}
+    <!--begin::Content-->
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Container-->
+        <div class="container-xxl" id="kt_content_container">
+            <!--begin::Navbar-->
+            <div class="card mb-9">
+                <div class="card-body pt-9 pb-0">
+                    <!--begin::Details-->
+                    <div class="d-flex flex-wrap flex-sm-nowrap mb-6">
+                        <!--begin::Image-->
+                        <div class="d-flex flex-center flex-shrink-0 bg-light rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4">
+                            {% if data.search_type == 'organic_search' %}
+                                <img class="mw-50px mw-lg-75px" src="/static/media/svg/brand-logos/OS.svg" alt="image" />
+                            {% else %}
+                                <img class="mw-50px mw-lg-75px" src="/static/media/svg/brand-logos/GM.svg" alt="image" />
+                            {% endif %}
+                            
+                        </div>
+                        <!--end::Image-->
+                        <!--begin::Wrapper-->
+                        <div class="flex-grow-1">
+                            <!--begin::Head-->
+                            <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                                <!--begin::Details-->
+                                <div class="d-flex flex-column">
+                                    <!--begin::Status-->
+                                    <div class="d-flex align-items-center mb-1">
+                                        <a href="#" class="text-gray-800 text-hover-primary fs-2 fw-bold me-3">{{data.title}}(Campaign) Dashboard</a>
+                                        <span class="badge badge-light-success me-auto">In Progress</span>
+                                    </div>
+                                    <!--end::Status-->
+                                    <!--begin::Description-->
+                                    <div class="d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-400">Campaign Information & Setting</div>
+                                    <!--end::Description-->
+                                </div>
+                                <!--end::Details-->
+                                <!--begin::Actions-->
+                                <div class="d-flex mb-4">
+                                    <a href="#" class="btn btn-sm btn-bg-light btn-active-color-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_create_campaign">Add New Campaign</a>
+                                    {% if  request.user.searches_status and request.user.searches|per_day_search_status:request.user.id %}
+                                        <a href="#" name="create-keyword" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends" data-camp-id="{{data.id}}">Add Keywords</a>
+                                    {% else %}
+                                        <a onclick="Upgrade()" name="create-keyword" class="btn btn-sm btn-primary me-3">Add Keywords</a>
+                                    {% endif %}
+                                    <!--begin::Menu-->
+                                    <div class="me-0">
+                                        <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                            <i class="bi bi-three-dots fs-3"></i>
+                                        </button>
+                                        <!--begin::Menu 3-->
+                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-200px py-3" data-kt-menu="true">
+                                            <!--begin::Heading-->
+                                            <div class="menu-item px-3">
+                                                <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Settings</div>
+                                            </div>
+                                            <!--end::Heading-->
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a href="#" id="delete_campaign" camp-id="{{data.id}}" class="menu-link px-3">Delete Campaign</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3 my-1">
+                                                <a href="#" class="menu-link px-3">Settings</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                        </div>
+                                        <!--end::Menu 3-->
+                                    </div>
+                                    <!--end::Menu-->
+                                </div>
+                                <!--end::Actions-->
+                            </div>
+                            <!--end::Head-->
+                            <!--begin::Info-->
+                            <div class="d-flex flex-wrap justify-content-start">
+                                <!--begin::Stats-->
+                                <div class="d-flex flex-wrap">
+                                    <!--begin::Stat-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                        <!--begin::Number-->
+                                        <div class="d-flex align-items-center">
+                                            <div class="fs-4 fw-bold">{{data.created_at|date:"M d, Y" }}</div>
+                                        </div>
+                                        <!--end::Number-->
+                                        <!--begin::Label-->
+                                        <div class="fw-semibold fs-6 text-gray-400">Creation Date</div>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Stat-->
+                                    <!--begin::Stat-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                        <!--begin::Number-->
+                                        <div class="d-flex align-items-center">
+                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr065.svg-->
+                                            <span class="svg-icon svg-icon-3 svg-icon-danger me-2">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <rect opacity="0.5" x="11" y="18" width="13" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor" />
+                                                    <path d="M11.4343 15.4343L7.25 11.25C6.83579 10.8358 6.16421 10.8358 5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75L11.2929 18.2929C11.6834 18.6834 12.3166 18.6834 12.7071 18.2929L18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25C17.8358 10.8358 17.1642 10.8358 16.75 11.25L12.5657 15.4343C12.2533 15.7467 11.7467 15.7467 11.4343 15.4343Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                            <div class="fs-4 fw-bold" data-kt-countup="true" data-kt-countup-value="75">0</div>
+                                        </div>
+                                        <!--end::Number-->
+                                        <!--begin::Label-->
+                                        <div class="fw-semibold fs-6 text-gray-400">Keywords</div>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Stat-->
+                                    <!--begin::Stat-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                        <!--begin::Number-->
+                                        <div class="d-flex align-items-center">
+                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+                                            <span class="svg-icon svg-icon-3 svg-icon-success me-2">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="currentColor" />
+                                                    <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="currentColor" />
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                            <div class="fs-4 fw-bold" data-kt-countup="true" data-kt-countup-value="150">0</div>
+                                        </div>
+                                        <!--end::Number-->
+                                        <!--begin::Label-->
+                                        <div class="fw-semibold fs-6 text-gray-400">Total Searches</div>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Stat-->
+                                </div>
+                                <!--end::Stats-->
+                                <!--begin::Users-->
+                                <div class="symbol-group symbol-hover mb-3">
+                                    <!--begin::User-->
+                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Keyword A">
+                                        <span class="symbol-label bg-warning text-inverse-warning fw-bold">A</span>
+                                    </div>
+                                    <!--end::User-->
+                                    <!--begin::User-->
+                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Keyword B">
+                                        <span class="symbol-label bg-warning text-inverse-warning fw-bold">B</span>
+                                    </div>
+                                    <!--end::User-->
+                                    <!--begin::User-->
+                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="Keyword C">
+                                        <span class="symbol-label bg-warning text-inverse-warning fw-bold">C</span>
+                                    </div>
+                                    <!--end::User-->
+                                    <!--begin::All users-->
+                                    <a href="#" class="symbol symbol-35px symbol-circle" data-bs-toggle="modal" data-bs-target="#kt_modal_view_users">
+                                        <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bold" data-bs-toggle="tooltip" data-bs-trigger="hover" title="View more Keywords">+42</span>
+                                    </a>
+                                    <!--end::All users-->
+                                </div>
+                                <!--end::Users-->
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Details-->
+                    <div class="separator"></div>
+                    <!--begin::Nav-->
+                    <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
+                        <!--begin::Nav item-->
+                        <li class="nav-item">
+                            <a class="nav-link text-active-primary py-5 me-6 active" href="#">Overview</a>
+                        </li>
+                        <!--end::Nav item-->
+                        <!--begin::Nav item-->
+                        <li class="nav-item">
+                            <a class="nav-link text-active-primary py-5 me-6" href="#">Keywords</a>
+                        </li>
+                        <!--end::Nav item-->
+                        <!--begin::Nav item-->
+                        <li class="nav-item">
+                            <a class="nav-link text-active-primary py-5 me-6" href="#">Searches</a>
+                        </li>
+                        <!--end::Nav item-->
+                        <!--begin::Nav item-->
+                        <li class="nav-item">
+                            <a class="nav-link text-active-primary py-5 me-6" href="#">Schedule Seaches</a>
+                        </li>
+                        <!--end::Nav item-->
+                        <!--begin::Nav item-->
+                        <li class="nav-item">
+                            <a class="nav-link text-active-primary py-5 me-6" href="#">Activity</a>
+                        </li>
+                        <!--end::Nav item-->
+                        <!--begin::Nav item-->
+                        <li class="nav-item">
+                            <a class="nav-link text-active-primary py-5 me-6" href="#">Settings</a>
+                        </li>
+                        <!--end::Nav item-->
+                    </ul>
+                    <!--end::Nav-->
+                </div>
+            </div>
+            <!--end::Navbar-->
+            <!--begin::Card-->
+            <div class="card">
+                <!--begin::Card header-->
+                <div class="card-header">
+                    <!--begin::Card title-->
+                    <div class="card-title fs-3 fw-bold">Campaign {{data.title}}</div>
+                    <!--end::Card title-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Form-->
+                <form id="kt_project_settings_form" class="form">
+                    <!--begin::Card body-->
+                    <div class="card-body p-9">
+                        <!--begin::Row-->
+                        <div class="row mb-8">
+                            <!--begin::Col-->
+                            <div class="col-xl-3">
+                                <div class="fs-6 fw-semibold mt-2 mb-3">Campaign Name</div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-9 fv-row">
+                                <input type="text" class="form-control form-control-solid" name="name" value="{{data.title}}" />
+                            </div>
+                        </div>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <div class="row mb-8">
+                            <!--begin::Col-->
+                            <div class="col-xl-3">
+                                <div class="fs-6 fw-semibold mt-2 mb-3">Website URL</div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-9 fv-row">
+                                <input type="text" class="form-control form-control-solid" name="name" value="{{data.website}}" />
+                            </div>
+                        </div>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <div class="row mb-8">
+                            <!--begin::Col-->
+                            <div class="col-xl-3">
+                                <div class="fs-6 fw-semibold mt-2 mb-3">Mobile Search %</div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-9 fv-row">
+                                <input type="text" class="form-control form-control-solid" name="name" value="{{data.mobile_Searches}}" />
+                            </div>
+                        </div>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <div class="row mb-8">
+                            <!--begin::Col-->
+                            <div class="col-xl-3">
+                                <div class="fs-6 fw-semibold mt-2 mb-3">Bounce Rate %</div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-9 fv-row">
+                                <input type="text" class="form-control form-control-solid" name="name" value="{{data.bounce_rate}}" />
+                            </div>
+                        </div>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <div class="row mb-8">
+                            <!--begin::Col-->
+                            <div class="col-xl-3">
+                                <div class="fs-6 fw-semibold mt-2 mb-3">Pages Per Session</div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-9 fv-row" style="display: flex;">
+                                <div class="col col-lg-1">
+                                    <label style="font-size: initial;
+                                    color: black;
+                                    margin-left: 20%;" id="page_Seesion_volumn">{{data.pages_per_session}}</label>
+                                </div>
+                                <div class="col col-lg-11">
+                                    <input type="range" onchange="campaignSessionOutputUpdate(this.value)" min="0" max="5" value="{{data.pages_per_session}}" step="1" list="volsettings" style="width: 100%;"/>
+                                    <datalist id="volsettings">
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </datalist>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <div class="row mb-8">
+                            <!--begin::Col-->
+                            <div class="col-xl-3">
+                                <div class="fs-6 fw-semibold mt-2 mb-3">Average Session Duration</div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-9 fv-row">
+                                <input type="text" class="form-control form-control-solid" name="name" value="{{data.avg_session_duration}}" />
+                            </div>
+                        </div>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <div class="row mb-8">
+                            <!--begin::Col-->
+                            <div class="col-xl-3">
+                                <div class="fs-6 fw-semibold mt-2 mb-3">Campaign Description</div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-9 fv-row">
+                                <textarea name="description" class="form-control form-control-solid h-100px">
+                                    {% if data.description %}
+                                        {{data.description}}
+                                    {% endif %}
+                                </textarea>
+                            </div>
+                            <!--begin::Col-->
+                        </div>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <div class="row mb-8">
+                            <!--begin::Col-->
+                            <div class="col-xl-3">
+                                <div class="fs-6 fw-semibold mt-2 mb-3">Campaign Search Type</div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-9">
+                                <div class="d-flex fw-semibold h-100">
+                                    <div class="form-check form-check-custom form-check-solid me-9">
+                                        <input class="form-check-input" type="radio" value="organic_search" name="search_type" {% if data.search_type == 'organic_search' %} checked{% endif %}/>
+                                        <label class="form-check-label ms-3" for="email">Organic Search</label>
+                                    </div>
+                                    <div class="form-check form-check-custom form-check-solid">
+                                        <input class="form-check-input" type="radio" value="googlemap"  name="search_type" {% if data.search_type == 'googlemap'%} checked{% endif %}/>
+                                        <label class="form-check-label ms-3" for="phone">Google Maps</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <div class="row">
+                            <!--begin::Col-->
+                            <div class="col-xl-3">
+                                <div class="fs-6 fw-semibold mt-2 mb-3">Status</div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-9">
+                                <div class="form-check form-switch form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="checkbox" value="" id="status" name="status" {% if data.is_active %} checked{% endif %} />
+                                    <label class="form-check-label fw-semibold text-gray-400 ms-3" for="status">Active</label>
+                                </div>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Card body-->
+                    <!--begin::Card footer-->
+                    <div class="card-footer d-flex justify-content-end py-6 px-9">
+                        <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
+                        <button type="submit" class="btn btn-primary" id="kt_project_settings_submit">Save Changes</button>
+                    </div>
+                    <!--end::Card footer-->
+                </form>
+                <!--end:Form-->
+            </div>
+            <!--end::Card-->
+            <br><br>
+            <!-- keyword -->
+            <!--begin::Card-->
+            <div class="card">
+                <!--begin::Card header-->
+                <div class="card-header">
+                    <!--begin::Card title-->
+                    <div class="card-title fs-3 fw-bold">Keywords</div>
+                    <!--end::Card title-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body p-0">
+                    <!--begin::Table wrapper-->
+                    <div class="table-responsive">
+                        <!--begin::Table-->
+                        <table class="table table-flush align-middle table-row-bordered table-row-solid gy-4 gs-9">
+                            <!--begin::Thead-->
+                            <thead class="border-gray-200 fs-5 fw-semibold bg-lighten">
+                                <tr>
+                                    <th class="min-w-250px">Date</th>
+                                    <th class="min-w-100px">City</th>
+                                    <th class="min-w-150px">Keyword</th>
+                                    <th class="min-w-150px">Seaches/Day</th>
+                                    <th class="min-w-150px">Position</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <!--end::Thead-->
+                            <!--begin::Tbody-->
+                            <tbody class="fw-6 fw-semibold text-gray-600">
+                                
+                                {% for keyword in keywords_data %}
+                                    <tr id="keyword_row_{{keyword.id}}">
+                                        <td>{{keyword.created_at}}</td>
+                                        <td>{{keyword.city}}({{keyword.state}},{{keyword.country}})</td>
+                                        <td>
+                                            <a href="/search-results/{{keyword.id}}/" class="text-hover-primary text-gray-600">{{keyword.keyword}}</a>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-light-success fs-7 fw-bold">{{keyword.searches_per_day}}</span>
+                                        </td>
+                                        <td>
+                                            {% if keyword.id|keyword_status %}
+                                                <span class="badge badge-light-success fs-7 fw-bold">Found</span>
+                                            {% else %}
+                                                <span class="badge badge-light-danger fs-7 fw-bold">Not Found</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="/search-results/{{keyword.id}}/" class="btn btn-sm btn-light btn-active-light-primary">View</a>
+                                            <a onclick="delete_keyword('{{keyword.id}}')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                        
+                                    </tr>
+                                {% endfor %}
+                                
+                            </tbody>
+                            <!--end::Tbody-->
+                        </table>
+                        <!--end::Table-->
+                    </div>
+                    <!--end::Table wrapper-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Content-->
+
+    <script src="/static/js/campaign.js"></script>
+{% endblock content %}

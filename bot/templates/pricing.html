@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<!--
+Author: Keenthemes
+Product Name: Metronic | Bootstrap HTML, VueJS, React, Angular, Asp.Net Core, Blazor, Django, Flask & Laravel Admin Dashboard Theme
+Purchase: https://1.envato.market/EA4JP
+Website: http://www.keenthemes.com
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
+<html lang="en">
+	<!--begin::Head-->
+	<head><base href="../../"/>
+		<title>Pricing | CTR Boss</title>
+		<meta charset="utf-8" />
+		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Blazor, Django, Flask & Laravel versions. Grab your copy now and get life-time updates for free." />
+		<meta name="keywords" content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Blazor, Django, Flask & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="Metronic | Bootstrap HTML, VueJS, React, Angular, Asp.Net Core, Blazor, Django, Flask & Laravel Admin Dashboard Theme" />
+		<meta property="og:url" content="https://keenthemes.com/metronic" />
+		<meta property="og:site_name" content="Keenthemes | Metronic" />
+		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+		<link rel="shortcut icon" href="/static/media/logos/favicon.ico" />
+		<!--begin::Fonts-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+		<!--end::Fonts-->
+		<!--begin::Vendor Stylesheets(used by this page)-->
+		<link href="/static/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+		<!--end::Vendor Stylesheets-->
+		<!--begin::Global Stylesheets Bundle(used by all pages)-->
+		<link href="/static/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/static/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<!--end::Global Stylesheets Bundle-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <!-- round slider -->
+        <link href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css" rel="stylesheet" />                                  
+        <!-- stripe -->
+		<script src="https://js.stripe.com/v3/"></script>
+	</head>
+	<!--end::Head-->
+    <style>
+    #handle1 .rs-handle  {
+        background-color: transparent;
+        border: 8px solid transparent;
+        border-right-color: black;
+        margin: -6px 0px 0px 14px !important;
+        border-width: 6px 250px 6px 4px;
+        /* border-width: 6px 104px 6px 4px; */
+    }
+    #handle1 .rs-handle:before  {
+        display: block;
+        content: " ";
+        position: absolute;
+        height: 22px;
+        width: 22px;
+        background: black;
+        right: -11px;
+        bottom: -11px;
+        border-radius: 100px;
+    }
+    #handle1 .rs-tooltip  {
+        top: 75%;
+        font-size: 25px;
+		font-family: fantasy;
+        /* font: initial; */
+    }
+    #handle1 .rs-tooltip div  {
+        text-align: center;
+        /* background: #dcfdfd;
+        color: #04c8c8; */
+        /* background: orange; */
+        /* color: white; */
+        font: bold;
+        border-radius: 4px;
+        padding: 1px 5px 2px;
+        margin-top: 4px;
+    }
+    #handle1 .rs-range-color  {
+        background-color: #01b969;
+		/* background-color: #04c8c8; */
+        /* background-color: #DB5959; */
+    }
+    #handle1 .rs-path-color  {
+        background-color: #e4e6ef;
+        /* background-color: #F0C5C5; */
+    }
+	input[type=range] {
+		-webkit-appearance: none;
+		background-color: #FDB52A;
+		width: 100%;
+		height:20px;
+	}
+
+	input[type="range"]::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		background-color: #01b969;
+		opacity: 0.5;
+		width: 30px;
+		height: 50px;
+	}
+	.text-primary, .link-primary, .link-primary:hover{
+		color: #01b969!important;
+	}
+	.btn, .btn:hover {
+		background-color: #01b969!important;
+		color: #e4e6ef;
+	}
+
+	.payment-item-icon {
+		max-width: 113px;
+		float: left;
+	}
+	.payment-item button {
+		margin-left: 20px;
+	}
+	img.custom-loader {
+		height: auto;
+		width: auto;
+		max-width: 100%;
+	}
+	.payment-item {
+		padding: 10px 0;
+		width: 100%;
+		float: left;
+		text-align: center;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.payment-item-icon button {
+		border: 1px solid !important;
+		background: transparent !important;
+		padding: 5px !important;
+	}
+	.payment-item-icon button:hover {
+		border: 1px solid #000 !important;
+		background: transparent !important;
+		padding: 5px !important;
+	}
+  </style>
+	<!--begin::Body-->
+	<body id="kt_body" style="background-image: url();flex-direction: inherit;" class="header-fixed header-tablet-and-mobile-fixed aside-fixed aside-secondary-enabled">
+		<!--begin::Main-->
+		<!--begin::Root-->
+		<div class="d-flex flex-column flex-root">
+			<!--begin::Page-->
+			<div class="page d-flex flex-row flex-column-fluid">
+				<!--begin::Wrapper-->
+				<div class="d-flex flex-column flex-row-fluid" id="kt_wrapper">
+					<!--begin::Content-->
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<!--begin::Container-->
+						<div class="container-xxl" id="kt_content_container">
+							<!--begin::Pricing card-->
+							<div class="card" id="kt_pricing">
+								<!--begin::Card body-->
+								<div class="card-body p-lg-17">
+									<!--begin::Plans-->
+									<div class="d-flex flex-column">
+										<!--begin::Heading-->
+										<div class="mb-13 text-center">
+											<h1 class="fs-2hx fw-bold mb-5">Choose Your Plan</h1>
+										</div>
+										<!--end::Heading-->
+										<!--begin::Nav group-->
+										<div class="mx-auto mb-15" data-kt-buttons="true">
+											<!-- <div class="row">
+                                                <div id="slider"></div>
+                                            </div>
+                                            <br><br>
+                                            <div class="row">
+                                                <div id="handle1"></div>
+                                            </div> -->
+										</div>
+										<!--end::Nav group-->
+										<!--begin::Row-->
+										<div class="row g-10">
+											<!--begin::Col-->
+                                            <!-- offset-xl-2 -->
+                                            <div class="col-xl-6">
+                                                <div class="row" style="margin: 0px;">
+                                                    <div id="handle1"></div>
+													
+													<input id="pricing" type="range" value="0" min="0" max="21" step="1" style="margin-top: 21%;">
+													<input type="hidden" id="price_plan" value="price_1MVaPUJCDPvINMYswzvBxTMk" readonly> 
+													<!-- list="tickmarks" -->
+													<!-- <datalist id="tickmarks">
+														<option>25</option>
+														<option>50</option>
+														<option>100</option>
+														<option>150</option>
+														<option>200</option>
+														<option>300</option>
+														<option>500</option>
+														<option>1000</option>
+														<option>1500</option>
+														<option>2000</option>
+														<option>3000</option>
+														<option>4000</option>
+														<option>5000</option>
+														<option>6000</option>
+														<option>7000</option>
+														<option>8000</option>
+														<option>9000</option>
+														<option>10000</option>
+														<option>20000</option>
+														<option>30000</option>
+														<option>40000</option>
+														<option>50000</option>
+													</datalist> -->
+                                                </div>
+												
+
+                                            </div>
+											<div class="col-xl-6">
+												<div class="d-flex h-100 align-items-center">
+													<!--begin::Option-->
+													<div class="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 py-15 px-10">
+														<!--begin::Heading-->
+														<div class="mb-7 text-center">
+															<!--begin::Title-->
+															<h1 class="text-dark mb-5 fw-bolder">Custom Pricing</h1>
+															<!--end::Title-->
+															<!--begin::Description-->
+															<div class="text-gray-400 fw-semibold mb-5">Set your own number
+															<br />of searches per day</div>
+															<!--end::Description-->
+															<!--begin::Price-->
+															<div class="text-center">
+																<span class="mb-2 text-primary">$</span>
+																<span class="fs-3x fw-bold text-primary" data-kt-plan-price-month="49" data-kt-plan-price-annual="399" id="monthly_cost">49</span>
+																<span class="fs-7 fw-semibold opacity-50">/
+																<span data-kt-element="period">Month</span></span>
+															</div>
+															<!--end::Price-->
+														</div>
+														<!--end::Heading-->
+														<!--begin::Features-->
+														<div class="w-100 mb-10">
+															<!--begin::Item-->
+															<div class="d-flex align-items-center mb-5">
+																<span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Campaigns</span>
+																<!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
+																<span class="svg-icon svg-icon-1 svg-icon-success">
+                                                                    <p class="fw-bold text-primary" id="monthly_campaigns">Unlimited</p>
+																	<!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
+																		<path d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z" fill="currentColor" />
+																	</svg> -->
+																</span>
+																<!--end::Svg Icon-->
+															</div>
+															<!--end::Item-->
+                                                            <!--begin::Item-->
+															<div class="d-flex align-items-center mb-5">
+																<span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Keywords</span>
+																<!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
+																<span class="svg-icon svg-icon-1 svg-icon-success">
+                                                                    <p class="fw-bold text-primary" id="monthly_keywords">Unlimited</p>
+																</span>
+																<!--end::Svg Icon-->
+															</div>
+															<!--end::Item-->
+															<!--begin::Item-->
+															<div class="d-flex align-items-center mb-5">
+																<span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Cost per Search</span>
+																<!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
+																<span class="svg-icon svg-icon-1 svg-icon-success">
+                                                                    <p class="fw-bold text-primary" id="cost_per_search">$0.052</p>
+																</span>
+																<!--end::Svg Icon-->
+															</div>
+															<!--end::Item-->
+															<!--begin::Item-->
+															<div class="d-flex align-items-center mb-5">
+																<span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Time on Site</span>
+																<!--begin::Svg Icon | path: icons/duotune/general/gen043.svg-->
+																<p class="fw-bold text-primary" id="site_time">Up to 70 seconds</p>
+																<!--end::Svg Icon-->
+															</div>
+															<!--end::Item-->
+															<!--begin::Item-->
+															<div class="d-flex align-items-center mb-5">
+																<span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Pageviews</span>
+																<p class="fw-bold text-primary" id="page_views">Up to 1</p>
+															</div>
+															<!--end::Item-->
+                                                            <!--begin::Item-->
+															<div class="d-flex align-items-center mb-5">
+																<span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Geo-Targeting</span>
+																<p class="fw-bold text-primary" id="geo_targetting">City Level</p>
+															</div>
+															<!--end::Item-->
+                                                            <!--begin::Item-->
+															<div class="d-flex align-items-center mb-5">
+																<span class="fw-bold fs-6 text-gray-800 flex-grow-1 pe-3">Bounce Rate</span>
+																<p class="fw-bold text-primary" id="bounce_rate">Between to 0% to 100%</p>
+															</div>
+															<!--end::Item-->
+														</div>
+														<!--end::Features-->
+														<!--begin::Select-->
+														<!-- <a href="javascript:upgrade()" class="btn" style="color: white;"><b>Upgrade</b></a> -->
+														<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">Upgrade</button>
+<!--														<button id="checkout-button" class="btn" style="color: white;">Upgrade</button>-->
+<!--														<button id="checkout-button-paypal" class="btn" style="color: white;" onclick="checkout_paypal()">Upgrade with paypal</button>-->
+														<!--- current plan seraches -->
+															<input id="current_plan" type="number" value="{{request.user.searches}}" hidden />
+															<!-- end --->
+														<!--end::Select-->
+													</div>
+													<!--end::Option-->
+												</div>
+											</div>
+											<!--end::Col-->
+										</div>
+										<!--end::Row-->
+									</div>
+									<!--end::Plans-->
+								</div>
+								<!--end::Card body-->
+							</div>
+							<!--end::Pricing card-->
+						</div>
+						<!--end::Container-->
+					</div>
+
+					<!--- payment model --->
+					<!-- Button trigger modal-->
+
+					<!-- Modal-->
+					<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel text-center"><b>Payement Mode</b></h5>
+									<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<i aria-hidden="true" class="ki ki-close"></i>
+									</button> -->
+								</div>
+								<div class="modal-body">
+									<div class="payment-item">
+										<div class="payment-item-icon stripe-icon">
+											<button id="checkout-button" class="btn">
+												<img src="/static/images/2560pxStripeLogorevised2016svg.png" class="custom-loader" />
+											</button>
+										</div>
+										<!-- <button id="checkout-button" class="btn" style="color: white;">Stripe</button> -->
+									</div>
+									<div class="payment-item">
+										<div class="payment-item-icon paypal-icon">
+											<button id="checkout-button-paypal" class="btn" onclick="checkout_paypal()">
+												<img src="/static/images/paypal-784404_1280.png" class="custom-loader" />
+											</button>
+										</div>
+										<!-- <button id="checkout-button-paypal" class="btn" style="color: white;" onclick="checkout_paypal()">Paypal</button> -->
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--- end model popup -->
+
+
+					<!--end::Content-->
+					<!--begin::Footer-->
+					<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
+						<!--begin::Container-->
+						<div class="container-xxl d-flex flex-column flex-md-row flex-stack">
+							<!--begin::Copyright-->
+							<div class="text-dark order-2 order-md-1">
+								<span class="text-gray-400 fw-semibold me-1">Created by</span>
+								<a href="https://www.nicheranker.com/" target="_blank" class="text-muted text-hover-primary fw-semibold me-2 fs-6">Niche Ranker</a>
+							</div>
+							<!--end::Copyright-->
+							<!--begin::Menu-->
+							<!-- <ul class="menu menu-gray-600 menu-hover-primary fw-semibold order-1">
+								<li class="menu-item">
+									<a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
+								</li>
+								<li class="menu-item">
+									<a href="https://devs.keenthemes.com" target="_blank" class="menu-link px-2">Support</a>
+								</li>
+								<li class="menu-item">
+									<a href="https://1.envato.market/EA4JP" target="_blank" class="menu-link px-2">Purchase</a>
+								</li>
+							</ul> -->
+							<!--end::Menu-->
+						</div>
+						<!--end::Container-->
+					</div>
+					<!--end::Footer-->
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Page-->
+		</div>
+		<!--end::Root-->
+
+
+		<!--end::Main-->
+		<!--begin::Scrolltop-->
+		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+			<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+			<span class="svg-icon">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="currentColor" />
+					<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="currentColor" />
+				</svg>
+			</span>
+			<!--end::Svg Icon-->
+		</div>
+		<!--end::Scrolltop-->
+		
+		<!--begin::Javascript-->
+		<script>var hostUrl = "/static/";</script>
+		<!--begin::Global Javascript Bundle(used by all pages)-->
+		<script src="/static/plugins/global/plugins.bundle.js"></script>
+		<script src="/static/js/scripts.bundle.js"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Vendors Javascript(used by this page)-->
+		<script src="/static/plugins/custom/datatables/datatables.bundle.js"></script>
+		<!--end::Vendors Javascript-->
+		<!--begin::Custom Javascript(used by this page)-->
+		<script src="/static/js/custom/pages/pricing/general.js"></script>
+		<script src="/static/js/widgets.bundle.js"></script>
+		<script src="/static/js/custom/widgets.js"></script>
+		<script src="/static/js/custom/apps/chat/chat.js"></script>
+		<script src="/static/js/custom/utilities/modals/upgrade-plan.js"></script>
+		<script src="/static/js/custom/utilities/modals/create-app.js"></script>
+		<script src="/static/js/custom/utilities/modals/users-search.js"></script>
+		<script src="/static/js/pricing.js"></script>
+		<!--end::Custom Javascript-->
+		<!--end::Javascript-->
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <!-- round slider -->
+        <script src="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.js"></script>
+        
+	</body>
+	<!--end::Body-->
+</html>

@@ -1,0 +1,182 @@
+{% extends "./campaignBase.html" %}
+{% block CampaignContent %}
+<!--begin::Card-->
+<div class="card">
+    <!--begin::Card header-->
+    <div class="card-header">
+        <!--begin::Card title-->
+        <div class="card-title fs-3 fw-bold">Campaign {{data.title}}</div>
+        <!--end::Card title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Form-->
+    <div class="form">
+        <!--begin::Card body-->
+        <div class="card-body p-9">
+            <!--begin::Row-->
+            <div class="row mb-8">
+                <!--begin::Col-->
+                <input type="hidden" id="camp-id" value="{{data.id}}"> 
+                <div class="col-xl-3">
+                    <div class="fs-6 fw-semibold mt-2 mb-3">Campaign Name</div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-9 fv-row">
+                    <input type="text" class="form-control form-control-solid" id="camp-name" name="name" value="{{data.title}}" />
+                </div>
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8">
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <div class="fs-6 fw-semibold mt-2 mb-3">Website URL</div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-9 fv-row">
+                    <input type="text" class="form-control form-control-solid" id="camp-website-url" name="name" value="{{data.website}}" />
+                </div>
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8">
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <div class="fs-6 fw-semibold mt-2 mb-3">Mobile Search %</div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-9 fv-row">
+                    <input type="number" max="100" min="0" class="form-control form-control-solid" id="camp-mobile-search" name="name" value="{{data.mobile_Searches}}" />
+                </div>
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8">
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <div class="fs-6 fw-semibold mt-2 mb-3">Bounce Rate %</div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-9 fv-row">
+                    <input type="number" max="100" min="0" class="form-control form-control-solid" id="camp-bounce-rate" name="name" value="{{data.bounce_rate}}" />
+                </div>
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8">
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <div class="fs-6 fw-semibold mt-2 mb-3">Pages Per Session</div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-9 fv-row" style="display: flex;">
+                    <div class="col col-lg-1">
+                        <label style="font-size: initial;
+                        color: black;
+                        margin-left: 20%;" id="page_Seesion_volumn">{{data.pages_per_session}}</label>
+                    </div>
+                    <div class="col col-lg-11">
+                        <input type="range" id="camp-session-pages" onchange="campaignSessionOutputUpdate(this.value)" min="0" max="{{searchPlan.total_pages}}" value="{{data.pages_per_session}}" step="1" list="volsettings" style="width: 100%;"/>
+                        <datalist id="volsettings">
+                            <option>0</option>
+                            {% for i in ""|ljust:searchPlan.total_pages %}
+                                <option>{{forloop.counter}}</option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                </div>
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8">
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <div class="fs-6 fw-semibold mt-2 mb-3">Average Session Duration</div><i>Min:40sec,Max:{{searchPlan.onsite_time}}sec</i>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-9 fv-row">
+                    <input type="number" max="{{searchPlan.onsite_time}}" min="40" id="camp-session-time" class="form-control form-control-solid" name="name" value="{{data.avg_session_duration}}" />
+                </div>
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row mb-8">
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <div class="fs-6 fw-semibold mt-2 mb-3">Campaign Description</div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-9 fv-row">
+                    <textarea id="camp-description" name="description" class="form-control form-control-solid h-100px">
+                        {% if data.description %}
+                            {{data.description}}
+                        {% endif %}
+                    </textarea>
+                </div>
+                <!--begin::Col-->
+            </div>
+            <!--end::Row-->
+            <!-- begin::Row-->
+            <!-- <div class="row mb-8">
+                <div class="col-xl-3">
+                    <div class="fs-6 fw-semibold mt-2 mb-3">Campaign Search Type</div>
+                </div>
+                <div class="col-xl-9">
+                    <div class="d-flex fw-semibold h-100">
+                        <div class="form-check form-check-custom form-check-solid me-9">
+                            <input class="form-check-input" type="radio" value="organic_search" name="search_type" {% if data.search_type == 'organic_search' %} checked{% endif %}/>
+                            <label class="form-check-label ms-3" for="email">Organic Search</label>
+                        </div>
+                        <div class="form-check form-check-custom form-check-solid">
+                            <input class="form-check-input" type="radio" value="googlemap"  name="search_type" {% if data.search_type == 'googlemap'%} checked{% endif %}/>
+                            <label class="form-check-label ms-3" for="phone">Google Maps</label>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!--end::Row -->
+            <!--begin::Row-->
+            <div class="row">
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <div class="fs-6 fw-semibold mt-2 mb-3">Status</div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-9">
+                    <div class="form-check form-switch form-check-custom form-check-solid">
+                        <input class="form-check-input" id="camp-active" type="checkbox" {% if data.is_active %} checked {% endif %} />
+                        <label class="form-check-label fw-semibold text-gray-400 ms-3">
+                            {% if data.is_active %}
+                                Active
+                            {% else %}
+                                Inactive
+                            {% endif %}
+                        </label>
+                    </div>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+        </div>
+        <!--end::Card body-->
+        <!--begin::Card footer-->
+        <div class="card-footer d-flex justify-content-end py-6 px-9">
+            <!-- <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button> -->
+            <input type="hidden" id="total-pages" value="{{searchPlan.total_pages}}">
+            <input type="hidden" id="onsite-time" value="{{searchPlan.onsite_time}}">
+            <button id="campaignUpdateSubmit" class="btn btn-primary">Save Changes</button>
+        </div>
+        <!--end::Card footer-->
+    </div>
+    <!--end:Form-->
+</div>
+<!--end::Card-->
+{% endblock CampaignContent %}
